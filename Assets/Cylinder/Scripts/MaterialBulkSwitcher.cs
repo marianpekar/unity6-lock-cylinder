@@ -23,13 +23,18 @@ public class SerializableList2D<T>
 public class MaterialBulkSwitcher : MonoBehaviour
 {
     public SerializableList2D<Material> materials;
-    public Renderer[] renderers;
+    private readonly List<Renderer> _renderers = new();
 
     public void SetMaterials(int setIdx)
     {
-        foreach (var r in renderers)
+        foreach (var r in _renderers)
         {
             r.SetMaterials(materials[setIdx]);
         }
+    }
+
+    public void AddRenderer(Renderer r)
+    {
+        _renderers.Add(r);
     }
 }

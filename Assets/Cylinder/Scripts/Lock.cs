@@ -12,12 +12,15 @@ public class Lock : MonoBehaviour
 
     public void Awake()
     {
+        var materialBulkSwitcher = GetComponent<MaterialBulkSwitcher>();
+        
         Cylinder[] cylinders = GetComponentsInChildren<Cylinder>();
 
         for (int i = 0; i < cylinders.Length; i++)
         {
             int digit = (value / (int)Mathf.Pow(10, i)) % 10;
             cylinders[i].SetParentLock(this, i, digit);
+            cylinders[i].AddRendererTo(materialBulkSwitcher);
         }
     }
 

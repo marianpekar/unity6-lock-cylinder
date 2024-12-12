@@ -69,4 +69,10 @@ public class Cylinder : MonoBehaviour
         
         _isRotating = false;
     }
+
+    public void AddRendererTo(MaterialBulkSwitcher materialBulkSwitcher)
+    {
+        var r = GetComponentInChildren<MeshRenderer>();
+        materialBulkSwitcher.AddRenderer(r);
+    }
 }
