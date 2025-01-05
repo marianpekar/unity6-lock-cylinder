@@ -61,7 +61,7 @@ public class Cylinder : MonoBehaviour
         // Ensure final position
         cylinder.transform.rotation = targetRotation; 
 
-        _value += (int)(-angle / 36);
+        _value -= (int)(angle / 36);
         if (_value > 9) _value = 0;
         if (_value < 0) _value = 9;
 
@@ -70,9 +70,9 @@ public class Cylinder : MonoBehaviour
         _isRotating = false;
     }
 
-    public void AddRendererTo(MaterialBulkSwitcher materialBulkSwitcher)
+    public void AddRendererTo(MaterialsSwitcher materialsSwitcher)
     {
         var r = GetComponentInChildren<MeshRenderer>();
-        materialBulkSwitcher.AddRenderer(r);
+        materialsSwitcher.AddRenderer(r);
     }
 }

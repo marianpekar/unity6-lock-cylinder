@@ -20,7 +20,7 @@ public class SerializableList2D<T>
     }
 }
 
-public class MaterialBulkSwitcher : MonoBehaviour
+public class MaterialsSwitcher : MonoBehaviour
 {
     public SerializableList2D<Material> materials;
     private readonly List<Renderer> _renderers = new();
