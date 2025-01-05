@@ -72,7 +72,7 @@ public class Cylinder : MonoBehaviour
 
     public void AddRendererTo(MaterialsSwitcher materialsSwitcher)
     {
-        var r = GetComponentInChildren<MeshRenderer>();
+        var r = cylinder.GetComponent<MeshRenderer>();
         materialsSwitcher.AddRenderer(r);
     }
 }
