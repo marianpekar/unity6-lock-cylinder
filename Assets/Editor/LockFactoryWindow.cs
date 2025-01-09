@@ -51,8 +51,6 @@ public class LockFactoryWindow : EditorWindow
         {
             CreateCylinder(i, parentLock);
         }
-
-        PrefabUtility.UnpackPrefabInstance(parentLock, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
     }
 
     private GameObject CreateRootObject()
@@ -63,7 +61,14 @@ public class LockFactoryWindow : EditorWindow
         lockScript.triggerValue = _triggerValue;
         lockScript.value = _initialValue;
 
+        UnpackPrefab(root);
+        
         return root;
+    }
+
+    private void UnpackPrefab(GameObject gameObject)
+    {
+        PrefabUtility.UnpackPrefabInstance(gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
     }
 
     private void CreateCase(GameObject parentLock)
@@ -71,10 +76,12 @@ public class LockFactoryWindow : EditorWindow
         var left = PrefabUtility.InstantiatePrefab(_caseLeftPrefab) as GameObject;
         left.transform.position = Vector3.back * (0.5f * _cylinders);
         left.transform.SetParent(parentLock.transform);
-
+        UnpackPrefab(left);
+        
         var right = PrefabUtility.InstantiatePrefab(_caseRightPrefab) as GameObject;
         right.transform.position = Vector3.back * -0.5f;
         right.transform.SetParent(parentLock.transform);
+        UnpackPrefab(right);
 
         var middle = PrefabUtility.InstantiatePrefab(_caseMiddlePrefab) as GameObject;
         middle.transform.position = Vector3.back * ((_cylinders - 1) * 0.25f);
@@ -82,6 +89,7 @@ public class LockFactoryWindow : EditorWindow
         scale.y = _cylinders * 100f;
         middle.transform.localScale = scale;
         middle.transform.SetParent(parentLock.transform);
+        UnpackPrefab(middle);
     }
 
     private void CreateCylinder(int i, GameObject parentLock)
@@ -89,5 +97,6 @@ public class LockFactoryWindow : EditorWindow
         var cylinder = PrefabUtility.InstantiatePrefab(_cylinderPrefab) as GameObject;
         cylinder.transform.position += Vector3.back * (0.5f * i);
         cylinder.transform.SetParent(parentLock.transform);
+        UnpackPrefab(cylinder);
     }
 }
